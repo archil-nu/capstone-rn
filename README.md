@@ -1,5 +1,3 @@
-![](little_lemon.gif)
-
 ## Little Lemon App
 
 This is final capstone project app for the Meta React Native developer certification on Coursera. This app is built from create-expo-app template.
