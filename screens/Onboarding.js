@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { validateEmail } from '../utils';
 import PlainButton from '../components/Button/PlainButton';
-import { DARK, LIGHT } from '../styles';
+import { DARK, FONTS, LIGHT } from '../styles';
 
 const Onboarding = () => {
   return (
@@ -32,7 +32,7 @@ const Onboarding = () => {
         // disabled={buttonDisableStatus}
         onPress={() => Alert.alert('Thanks for subscribing, stay tuned!')}
         title={nextMessage}
-        type={LIGHT}
+        type={DARK}
         customStyles={{ width: '30%' }}
       />
     </View>
@@ -55,9 +55,10 @@ const onboardingStyles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 40,
     paddingVertical: 40,
     padding: 30,
+    fontFamily: FONTS.MARKAZITEXT_REGULAR,
   },
   inputBox: {
     height: 40,
