@@ -6,13 +6,17 @@ import {
   LIGHT,
   DARK,
   LILLY_WHITE,
+  GONDOLA,
+  FONTS,
 } from '../../styles';
 
 const PlainButton = ({ title, onPress, disabled, type, customStyles }) => {
+  const currentType = type || DARK;
+
   return (
     <Pressable
       style={{
-        ...buttonStyles[type || DARK],
+        ...buttonStyles[currentType],
         ...buttonStyles.shared,
         ...customStyles,
       }}
@@ -28,8 +32,8 @@ const PlainButton = ({ title, onPress, disabled, type, customStyles }) => {
 
 const buttonStyles = StyleSheet.create({
   [LIGHT]: {
-    backgroundColor: COLORS[PRIMARY][DARK],
-    color: COLORS[SECONDARY][LILLY_WHITE],
+    backgroundColor: COLORS[PRIMARY][LIGHT],
+    color: COLORS[SECONDARY][GONDOLA],
   },
   [DARK]: {
     backgroundColor: COLORS[PRIMARY][DARK],
@@ -37,8 +41,8 @@ const buttonStyles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    fontSize: 15,
-    fontFamily: 'Karla-Regular',
+    fontSize: 20,
+    fontFamily: FONTS.KARLA_REGULAR,
   },
   shared: {
     padding: 10,

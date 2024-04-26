@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { validateEmail } from '../utils';
 import PlainButton from '../components/Button/PlainButton';
-import { DARK } from '../styles';
+import { DARK, LIGHT } from '../styles';
 
 const Onboarding = () => {
   return (
@@ -32,6 +32,7 @@ const Onboarding = () => {
         // disabled={buttonDisableStatus}
         onPress={() => Alert.alert('Thanks for subscribing, stay tuned!')}
         title={nextMessage}
+        type={LIGHT}
         customStyles={{ width: '30%' }}
       />
     </View>
