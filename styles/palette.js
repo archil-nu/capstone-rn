@@ -11,7 +11,7 @@ export const GONDOLA = 'gondola';
 
 export const FONTS = {
   KARLA_REGULAR: 'Karla-Regular',
-  MARKAZITEXT_REGULAR: 'MarkaziText-Regular',
+  MARKAZI_TEXT_REGULAR: 'MarkaziText-Regular',
 };
 
 export const COLORS = {

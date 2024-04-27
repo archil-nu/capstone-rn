@@ -1,40 +1,56 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Image,
-  StyleSheet,
-  Text,
-  TextInput,
-  Alert,
-  Pressable,
-} from 'react-native';
-import { validateEmail } from '../utils';
+import React, { useReducer } from 'react';
+import { View, StyleSheet, Text, TextInput, Alert } from 'react-native';
+
 import PlainButton from '../components/Button/PlainButton';
-import { DARK, FONTS, LIGHT } from '../styles';
+import {
+  COLORS,
+  DARK,
+  DARK_SALMON,
+  FONTS,
+  LIGHT,
+  PEACH_PUFF,
+  SECONDARY,
+  LILLY_WHITE,
+  PRIMARY,
+} from '../styles';
+import Input from '../components/Input/Input';
+import { useUserInformation } from '../hooks/useUserInformation';
 
 const Onboarding = () => {
+  const [user, setFirstName, setEmail, isValid] = useUserInformation();
+
   return (
     <View style={onboardingStyles.container}>
       <View style={onboardingStyles.welcome}>
-        <Text style={onboardingStyles.text}>{welcomeMessage}</Text>
+        <Text style={onboardingStyles.welcomeText}>{welcomeMessage}</Text>
       </View>
-
       <View style={onboardingStyles.form}>
-        <TextInput
-          style={onboardingStyles.inputBox}
-          // value={email}
-          // onChangeText={(email) => emailValidation(email)}
-          placeholder={'email'}
+        <Input
+          label={'First Name*'}
+          placeholder={'First Name'}
+          keyboardType={'default'}
+          value={user.firstName}
+          onChange={setFirstName}
+        />
+        <Input
+          label={'Email*'}
+          placeholder={'Email'}
           keyboardType={'email-address'}
+          value={user.email}
+          onChange={setEmail}
         />
       </View>
-      <PlainButton
-        // disabled={buttonDisableStatus}
-        onPress={() => Alert.alert('Thanks for subscribing, stay tuned!')}
-        title={nextMessage}
-        type={DARK}
-        customStyles={{ width: '30%' }}
-      />
+      <View style={onboardingStyles.footer}>
+        <View style={onboardingStyles.buttons}>
+          <PlainButton hidden={true} />
+          <PlainButton
+            onPress={() => Alert.alert('Hey there!')}
+            title={nextMessage}
+            type={DARK}
+            disabled={!isValid()}
+          />
+        </View>
+      </View>
     </View>
   );
 };
@@ -45,30 +61,33 @@ const nextMessage = 'Next';
 const onboardingStyles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     flexDirection: 'column',
-    paddingTop: 30,
+    backgroundColor: COLORS[SECONDARY][LILLY_WHITE],
   },
   welcome: {
-    flex: 0.4,
-    paddingTop: 30,
+    flex: 0.3,
+    justifyContent: 'center',
   },
-  text: {
+  welcomeText: {
     textAlign: 'center',
-    fontSize: 40,
-    paddingVertical: 40,
-    padding: 30,
-    fontFamily: FONTS.MARKAZITEXT_REGULAR,
+    fontSize: 32,
+    fontFamily: FONTS.MARKAZI_TEXT_REGULAR,
   },
-  inputBox: {
-    height: 40,
-    margin: 10,
-    borderWidth: 1,
-    padding: 10,
-    fontSize: 15,
-    width: '85%',
-    borderRadius: 4,
-    color: 'grey',
+  form: {
+    flex: 0.4,
+    width: '100%',
+    justifyContent: 'center',
+    backgroundColor: COLORS[SECONDARY][PEACH_PUFF],
+  },
+  buttons: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '90%',
+  },
+  footer: {
+    flex: 0.3,
+    alignItems: 'center',
   },
 });
 

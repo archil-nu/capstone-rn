@@ -8,7 +8,7 @@ SplashScreen.preventAutoHideAsync();
 const useCustomFonts = () => {
   const [fontsLoaded, fontError] = useFonts({
     [FONTS.KARLA_REGULAR]: require('../assets/fonts/Karla-Regular.ttf'),
-    [FONTS.MARKAZITEXT_REGULAR]: require('../assets/fonts/MarkaziText-Regular.ttf'),
+    [FONTS.MARKAZI_TEXT_REGULAR]: require('../assets/fonts/MarkaziText-Regular.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {
