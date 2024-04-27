@@ -3,7 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SubscribeScreen from '../screens/SubscribeScreen';
-import Onboarding from '../screens/Onboarding';
+
+import OnboardingScreen from '../screens/Onboarding';
+import HomeScreen from '../screens/Home';
 
 import LemonHeader from '../components/Header/LemonHeader';
 
@@ -12,13 +14,16 @@ const Stack = createNativeStackNavigator();
 const RootNavigator = () => {
   return (
     <Stack.Navigator
-      screenOptions={{
-        header: ({ options }) => <LemonHeader {...options} />,
-      }}
+    // screenOptions={{
+    //   header: ({ options }) => <LemonHeader {...options} />,
+    // }}
     >
-      <Stack.Screen name="Onboarding" component={Onboarding} />
-      {/* <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Subscribe" component={SubscribeScreen} /> */}
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Onboarding"
+        component={OnboardingScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

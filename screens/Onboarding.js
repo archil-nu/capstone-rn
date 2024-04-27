@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react';
-import { View, StyleSheet, Text, TextInput, Alert } from 'react-native';
+import React from 'react';
+import { View, StyleSheet, Text, Alert } from 'react-native';
 
 import PlainButton from '../components/Button/PlainButton';
 import {
@@ -15,43 +15,47 @@ import {
 } from '../styles';
 import Input from '../components/Input/Input';
 import { useUserInformation } from '../hooks/useUserInformation';
+import LemonHeader from '../components/Header/LemonHeader';
 
 const Onboarding = () => {
   const [user, setFirstName, setEmail, isValid] = useUserInformation();
 
   return (
-    <View style={onboardingStyles.container}>
-      <View style={onboardingStyles.welcome}>
-        <Text style={onboardingStyles.welcomeText}>{welcomeMessage}</Text>
-      </View>
-      <View style={onboardingStyles.form}>
-        <Input
-          label={'First Name*'}
-          placeholder={'First Name'}
-          keyboardType={'default'}
-          value={user.firstName}
-          onChange={setFirstName}
-        />
-        <Input
-          label={'Email*'}
-          placeholder={'Email'}
-          keyboardType={'email-address'}
-          value={user.email}
-          onChange={setEmail}
-        />
-      </View>
-      <View style={onboardingStyles.footer}>
-        <View style={onboardingStyles.buttons}>
-          <PlainButton hidden={true} />
-          <PlainButton
-            onPress={() => Alert.alert('Hey there!')}
-            title={nextMessage}
-            type={DARK}
-            disabled={!isValid()}
+    <>
+      <LemonHeader />
+      <View style={onboardingStyles.container}>
+        <View style={onboardingStyles.welcome}>
+          <Text style={onboardingStyles.welcomeText}>{welcomeMessage}</Text>
+        </View>
+        <View style={onboardingStyles.form}>
+          <Input
+            label={'First Name*'}
+            placeholder={'First Name'}
+            keyboardType={'default'}
+            value={user.firstName}
+            onChange={setFirstName}
+          />
+          <Input
+            label={'Email*'}
+            placeholder={'Email'}
+            keyboardType={'email-address'}
+            value={user.email}
+            onChange={setEmail}
           />
         </View>
+        <View style={onboardingStyles.footer}>
+          <View style={onboardingStyles.buttons}>
+            <PlainButton hidden={true} />
+            <PlainButton
+              onPress={() => Alert.alert('Hey there!')}
+              title={nextMessage}
+              type={DARK}
+              disabled={!isValid()}
+            />
+          </View>
+        </View>
       </View>
-    </View>
+    </>
   );
 };
 
@@ -65,7 +69,7 @@ const onboardingStyles = StyleSheet.create({
     backgroundColor: COLORS[SECONDARY][LILLY_WHITE],
   },
   welcome: {
-    flex: 0.3,
+    flex: 0.25,
     justifyContent: 'center',
   },
   welcomeText: {
@@ -86,7 +90,7 @@ const onboardingStyles = StyleSheet.create({
     width: '90%',
   },
   footer: {
-    flex: 0.3,
+    flex: 0.35,
     alignItems: 'center',
   },
 });

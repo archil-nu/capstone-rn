@@ -11,13 +11,13 @@ const useCustomFonts = () => {
     [FONTS.MARKAZI_TEXT_REGULAR]: require('../assets/fonts/MarkaziText-Regular.ttf'),
   });
 
-  const onLayoutRootView = useCallback(async () => {
+  const onLayoutAppView = useCallback(async () => {
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
 
-  return [fontsLoaded, fontError, onLayoutRootView];
+  return [fontsLoaded, fontError, onLayoutAppView];
 };
 
 export default useCustomFonts;

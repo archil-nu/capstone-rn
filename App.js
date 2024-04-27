@@ -6,14 +6,14 @@ import useCustomFonts from './hooks/useCustomFonts';
 import RootNavigator from './navigators/RootNavigator';
 
 const App = () => {
-  const [fontsLoaded, fontError, onLayoutRootView] = useCustomFonts();
+  const [fontsLoaded, fontError, onLayoutAppView] = useCustomFonts();
 
   if (!fontsLoaded && !fontError) {
     return null;
   }
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+    <View style={{ flex: 1 }} onLayout={onLayoutAppView}>
       <NavigationContainer>
         <RootNavigator />
       </NavigationContainer>
