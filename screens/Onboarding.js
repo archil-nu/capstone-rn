@@ -13,12 +13,21 @@ import {
   LILLY_WHITE,
   PRIMARY,
 } from '../styles';
+import {
+  FIRST_NAME,
+  EMAIL,
+  validateEmail,
+  IS_ONBOARDING_COMPLETE,
+} from '../utils';
 import Input from '../components/Input/Input';
-import { useUserInformation } from '../hooks/useUserInformation';
 import LemonHeader from '../components/Header/LemonHeader';
 
-const Onboarding = () => {
-  const [user, setFirstName, setEmail, isValid] = useUserInformation();
+const isValid = (firstName, email) => {
+  return !!firstName && !!validateEmail(email);
+};
+
+const Onboarding = ({ preferences, updatePreferences }) => {
+  const { firstName, email } = preferences;
 
   return (
     <>
@@ -32,25 +41,27 @@ const Onboarding = () => {
             label={'First Name*'}
             placeholder={'First Name'}
             keyboardType={'default'}
-            value={user.firstName}
-            onChange={setFirstName}
+            value={firstName}
+            onChange={updatePreferences(FIRST_NAME)}
           />
           <Input
             label={'Email*'}
             placeholder={'Email'}
             keyboardType={'email-address'}
-            value={user.email}
-            onChange={setEmail}
+            value={email}
+            onChange={updatePreferences(EMAIL)}
           />
         </View>
         <View style={onboardingStyles.footer}>
           <View style={onboardingStyles.buttons}>
             <PlainButton hidden={true} />
             <PlainButton
-              onPress={() => Alert.alert('Hey there!')}
+              onPress={() => {
+                updatePreferences(IS_ONBOARDING_COMPLETE)(true);
+              }}
               title={nextMessage}
               type={DARK}
-              disabled={!isValid()}
+              disabled={!isValid(firstName, email)}
             />
           </View>
         </View>

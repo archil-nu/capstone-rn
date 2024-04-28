@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
+import React from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+
 import { FONTS } from '../styles';
 
 SplashScreen.preventAutoHideAsync();
@@ -11,7 +12,7 @@ const useCustomFonts = () => {
     [FONTS.MARKAZI_TEXT_REGULAR]: require('../assets/fonts/MarkaziText-Regular.ttf'),
   });
 
-  const onLayoutAppView = useCallback(async () => {
+  const onLayoutAppView = React.useCallback(async () => {
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync();
     }
