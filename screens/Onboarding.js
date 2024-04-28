@@ -16,8 +16,8 @@ import {
 import {
   FIRST_NAME,
   EMAIL,
-  validateEmail,
   IS_ONBOARDING_COMPLETE,
+  validateEmail,
 } from '../utils';
 import Input from '../components/Input/Input';
 import LemonHeader from '../components/Header/LemonHeader';
@@ -26,7 +26,7 @@ const isValid = (firstName, email) => {
   return !!firstName && !!validateEmail(email);
 };
 
-const Onboarding = ({ preferences, updatePreferences }) => {
+const Onboarding = ({ preferences, updatePreferences, savePreferences }) => {
   const { firstName, email } = preferences;
 
   return (
@@ -57,7 +57,10 @@ const Onboarding = ({ preferences, updatePreferences }) => {
             <PlainButton hidden={true} />
             <PlainButton
               onPress={() => {
-                updatePreferences(IS_ONBOARDING_COMPLETE)(true);
+                if (isValid(firstName, email)) {
+                  updatePreferences(IS_ONBOARDING_COMPLETE)(true);
+                  savePreferences();
+                }
               }}
               title={nextMessage}
               type={DARK}
