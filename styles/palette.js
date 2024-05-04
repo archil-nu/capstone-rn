@@ -14,6 +14,8 @@ export const FONTS = {
   MARKAZI_TEXT_REGULAR: 'MarkaziText-Regular',
 };
 
+export const LEFT_ARROW = '←';
+
 export const COLORS = {
   [PRIMARY]: {
     [LIGHT]: '#F4CE14',

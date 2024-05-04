@@ -7,6 +7,8 @@ import OnboardingScreen from '../screens/Onboarding';
 import Profile from '../screens/Profile';
 import HomeScreen from '../screens/Home';
 
+import ProfileHeader from '../components/Header/ProfileHeader';
+
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
@@ -18,9 +20,9 @@ const RootNavigator = () => {
     clearPreferences,
   ] = usePreferences();
 
-  // React.useEffect(() => {
-  //   clearPreferences();
-  // }, []);
+  React.useEffect(() => {
+    clearPreferences();
+  }, []);
 
   if (loading) {
     return null;
@@ -34,11 +36,21 @@ const RootNavigator = () => {
   return (
     <Stack.Navigator
     // screenOptions={{
-    //   header: ({ options }) => <LemonHeader {...options} />,
+    //   headerTitle: () => <LemonHeader />,
     // }}
     >
       {isOnboardingComplete ? (
-        <Stack.Screen name="Profile">
+        <Stack.Screen
+          name="Profile"
+          options={({ navigation, route }) => ({
+            header: () => (
+              <ProfileHeader
+                onBack={() => navigation.goBack()}
+                onProfile={() => clearPreferences()}
+              />
+            ),
+          })}
+        >
           {(props) => (
             <Profile
               {...props}

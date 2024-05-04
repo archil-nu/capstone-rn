@@ -12,7 +12,7 @@ const LemonHeader = () => {
 const styles = StyleSheet.create({
   container: { height: 100, alignItems: 'center', backgroundColor: 'white' },
   space: { height: 50 },
-  image: { resizeMode: 'contain', height: 50 },
+  image: { resizeMode: 'contain', height: 50, width: 200 },
 });
 
 export default LemonHeader;
