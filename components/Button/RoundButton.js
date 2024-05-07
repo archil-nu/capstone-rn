@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 import PlainButton from './PlainButton';
 
 const RoundButton = (props) => (
-  <PlainButton {...props} customStyles={customStyles} />
+  <PlainButton {...props} overrideButtonStyles={roundButtonStyles} />
 );
 
-const customStyles = StyleSheet.create({
+const roundButtonStyles = StyleSheet.create({
   flex: 0,
   padding: 0,
   borderRadius: 25,

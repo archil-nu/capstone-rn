@@ -10,14 +10,23 @@ import {
   FONTS,
 } from '../../styles';
 
-const Input = ({ label, placeholder, keyboardType, value, onChange }) => {
+const Input = ({
+  label,
+  placeholder,
+  keyboardType,
+  value,
+  onChange,
+  customStyles,
+}) => {
+  const mergedStyles = StyleSheet.create({ ...inputStyles, ...customStyles });
+
   return (
-    <View style={inputStyles.container}>
-      <View style={inputStyles.labelBox}>
-        <Text style={inputStyles.label}>{label}</Text>
+    <View style={mergedStyles.container}>
+      <View style={mergedStyles.labelBox}>
+        <Text style={mergedStyles.label}>{label}</Text>
       </View>
       <TextInput
-        style={inputStyles.inputBox}
+        style={mergedStyles.inputBox}
         value={value}
         onChangeText={onChange}
         placeholder={placeholder}
@@ -27,7 +36,7 @@ const Input = ({ label, placeholder, keyboardType, value, onChange }) => {
   );
 };
 
-const inputStyles = StyleSheet.create({
+const inputStyles = {
   container: {
     alignItems: 'center',
     flexDirection: 'column',
@@ -35,7 +44,7 @@ const inputStyles = StyleSheet.create({
     paddingBottom: 15,
   },
   labelBox: {
-    width: '85%',
+    width: '100%',
   },
   label: {
     textAlign: 'center',
@@ -50,9 +59,9 @@ const inputStyles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     padding: 12,
-    width: '85%',
+    width: '100%',
     fontSize: 18,
   },
-});
+};
 
 export default Input;

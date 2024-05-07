@@ -26,7 +26,11 @@ const isValid = (firstName, email) => {
   return !!firstName && !!validateEmail(email);
 };
 
-const Onboarding = ({ preferences, updatePreferences, savePreferences }) => {
+const OnboardingScreen = ({
+  preferences,
+  updatePreferences,
+  savePreferences,
+}) => {
   const { firstName, email } = preferences;
 
   return (
@@ -109,4 +113,4 @@ const onboardingStyles = StyleSheet.create({
   },
 });
 
-export default Onboarding;
+export default OnboardingScreen;

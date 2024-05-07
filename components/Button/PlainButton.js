@@ -9,6 +9,8 @@ import {
   GONDOLA,
   FONTS,
   PEACH_PUFF,
+  DARK_SALMON,
+  YELLOW,
 } from '../../styles';
 
 const PlainButton = ({
@@ -17,14 +19,15 @@ const PlainButton = ({
   disabled,
   hidden,
   type,
-  customStyles = { text: {} },
+  overrideButtonStyles = {},
+  overrideLabelStyles = {},
 }) => {
   const currentType = type || DARK;
 
   const mergedButtonStyles = {
     ...buttonStyles[currentType],
     ...buttonStyles.shared,
-    ...customStyles,
+    ...overrideButtonStyles,
     ...(disabled && { ...buttonStyles.disabled }),
     ...(hidden && { ...buttonStyles.hidden }),
   };
@@ -32,6 +35,7 @@ const PlainButton = ({
   const mergedLabelStyles = {
     ...buttonStyles[currentType],
     ...labelStyles.text,
+    ...overrideLabelStyles,
     ...(disabled && { ...labelStyles.disabled }),
     ...(hidden && { ...labelStyles.hidden }),
   };
@@ -45,8 +49,14 @@ const PlainButton = ({
 
 const buttonStyles = StyleSheet.create({
   [LIGHT]: {
-    backgroundColor: COLORS[PRIMARY][LIGHT],
+    backgroundColor: COLORS[SECONDARY][LILLY_WHITE],
     color: COLORS[SECONDARY][GONDOLA],
+    borderColor: COLORS[SECONDARY][GONDOLA],
+  },
+  [YELLOW]: {
+    backgroundColor: COLORS[PRIMARY][YELLOW],
+    color: COLORS[SECONDARY][GONDOLA],
+    borderColor: COLORS[SECONDARY][PEACH_PUFF],
   },
   [DARK]: {
     backgroundColor: COLORS[PRIMARY][DARK],
@@ -67,6 +77,7 @@ const buttonStyles = StyleSheet.create({
     borderRadius: 10,
     minWidth: 100,
     maxHeight: 50,
+    borderWidth: 1,
   },
 });
 

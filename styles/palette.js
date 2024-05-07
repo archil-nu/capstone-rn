@@ -1,4 +1,5 @@
 export const LIGHT = 'light';
+export const YELLOW = 'yellow';
 export const DARK = 'dark';
 
 export const PRIMARY = 'primary';
@@ -14,11 +15,16 @@ export const FONTS = {
   MARKAZI_TEXT_REGULAR: 'MarkaziText-Regular',
 };
 
+export const LABEL_POSITION = {
+  LEFT: 'left',
+  CENTER: 'center',
+};
+
 export const LEFT_ARROW = '←';
 
 export const COLORS = {
   [PRIMARY]: {
-    [LIGHT]: '#F4CE14',
+    [YELLOW]: '#F4CE14',
     [DARK]: '#495E57',
   },
   [SECONDARY]: {

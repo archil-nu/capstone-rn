@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import usePreferences from '../hooks/usePreferences';
 
-import OnboardingScreen from '../screens/Onboarding';
-import Profile from '../screens/Profile';
+import OnboardingScreen from '../screens/OnboardingScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import HomeScreen from '../screens/Home';
 
 import ProfileHeader from '../components/Header/ProfileHeader';
@@ -20,9 +20,9 @@ const RootNavigator = () => {
     clearPreferences,
   ] = usePreferences();
 
-  React.useEffect(() => {
-    clearPreferences();
-  }, []);
+  // React.useEffect(() => {
+  //   clearPreferences();
+  // }, []);
 
   if (loading) {
     return null;
@@ -45,14 +45,14 @@ const RootNavigator = () => {
           options={({ navigation, route }) => ({
             header: () => (
               <ProfileHeader
-                onBack={() => navigation.goBack()}
-                onProfile={() => clearPreferences()}
+                onBack={() => console.log('back')}
+                onProfile={() => console.log('sign out')}
               />
             ),
           })}
         >
           {(props) => (
-            <Profile
+            <ProfileScreen
               {...props}
               preferences={preferences}
               updatePreferences={updatePreferences}

@@ -2,13 +2,41 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
-import { IS_ONBOARDING_COMPLETE, FIRST_NAME, EMAIL } from '../utils/constants';
+import {
+  IS_ONBOARDING_COMPLETE,
+  FIRST_NAME,
+  EMAIL,
+  LAST_NAME,
+  PHONE,
+  ORDER_STATUSES,
+  PASSWORD_CHANGES,
+  SPECIAL_OFFERS,
+  NEWSLETTER,
+} from '../utils/constants';
 
 const defaultPreferences = {
   [IS_ONBOARDING_COMPLETE]: false,
   [FIRST_NAME]: '',
+  [LAST_NAME]: '',
   [EMAIL]: '',
+  [PHONE]: '',
+  [ORDER_STATUSES]: false,
+  [PASSWORD_CHANGES]: false,
+  [SPECIAL_OFFERS]: false,
+  [NEWSLETTER]: false,
 };
+
+const ALL_KEYS = [
+  IS_ONBOARDING_COMPLETE,
+  FIRST_NAME,
+  LAST_NAME,
+  EMAIL,
+  PHONE,
+  ORDER_STATUSES,
+  PASSWORD_CHANGES,
+  SPECIAL_OFFERS,
+  NEWSLETTER,
+];
 
 const usePreferences = () => {
   const [preferences, setPreferences] = React.useState(defaultPreferences);
@@ -18,11 +46,7 @@ const usePreferences = () => {
   React.useEffect(() => {
     const fetchStorage = async () => {
       try {
-        const results = await AsyncStorage.multiGet([
-          IS_ONBOARDING_COMPLETE,
-          FIRST_NAME,
-          EMAIL,
-        ]);
+        const results = await AsyncStorage.multiGet(ALL_KEYS);
         setIsLoading(false);
         let loadedPreferences = { ...defaultPreferences };
         results.forEach(([key, value]) => {
@@ -76,7 +100,7 @@ const usePreferences = () => {
     console.log(key, value);
     setPreferences((prevState) => ({
       ...prevState,
-      [key]: value,
+      key: value,
     }));
   };
 
