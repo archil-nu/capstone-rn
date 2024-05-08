@@ -20,7 +20,7 @@ import {
   validateEmail,
 } from '../utils';
 import Input from '../components/Input/Input';
-import LemonHeader from '../components/Header/LemonHeader';
+import LemonHeader from '../components/Header/SimpleHeader';
 
 const isValid = (firstName, email) => {
   return !!firstName && !!validateEmail(email);
@@ -59,44 +59,41 @@ const OnboardingScreen = ({
   };
 
   return (
-    <>
-      <LemonHeader />
-      <View style={onboardingStyles.container}>
-        <View style={onboardingStyles.welcome}>
-          <Text style={onboardingStyles.welcomeText}>{welcomeMessage}</Text>
-        </View>
-        <View style={onboardingStyles.form}>
-          {onboardingSchema.map((field) => (
-            <Input
-              key={field.key}
-              label={field.label}
-              placeholder={field.placeholder}
-              keyboardType={'default'}
-              value={fields[field.key]}
-              onChange={handleChanges(field.key)}
-            />
-          ))}
-        </View>
-        <View style={onboardingStyles.footer}>
-          <View style={onboardingStyles.buttons}>
-            <PlainButton hidden={true} />
-            <PlainButton
-              onPress={async () => {
-                if (isValid(fields[FIRST_NAME], fields[EMAIL])) {
-                  await savePreferences({
-                    ...fields,
-                    [IS_ONBOARDING_COMPLETE]: true,
-                  });
-                }
-              }}
-              title={nextMessage}
-              type={DARK}
-              disabled={!isValid(fields[FIRST_NAME], fields[EMAIL])}
-            />
-          </View>
+    <View style={onboardingStyles.container}>
+      <View style={onboardingStyles.welcome}>
+        <Text style={onboardingStyles.welcomeText}>{welcomeMessage}</Text>
+      </View>
+      <View style={onboardingStyles.form}>
+        {onboardingSchema.map((field) => (
+          <Input
+            key={field.key}
+            label={field.label}
+            placeholder={field.placeholder}
+            keyboardType={'default'}
+            value={fields[field.key]}
+            onChange={handleChanges(field.key)}
+          />
+        ))}
+      </View>
+      <View style={onboardingStyles.footer}>
+        <View style={onboardingStyles.buttons}>
+          <PlainButton hidden={true} />
+          <PlainButton
+            onPress={async () => {
+              if (isValid(fields[FIRST_NAME], fields[EMAIL])) {
+                await savePreferences({
+                  ...fields,
+                  [IS_ONBOARDING_COMPLETE]: true,
+                });
+              }
+            }}
+            title={nextMessage}
+            type={DARK}
+            disabled={!isValid(fields[FIRST_NAME], fields[EMAIL])}
+          />
         </View>
       </View>
-    </>
+    </View>
   );
 };
 

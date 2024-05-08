@@ -9,7 +9,7 @@ import { AVATAR_IMAGE, FIRST_NAME, LAST_NAME } from '../../utils';
 const profileSchema = [{ key: FIRST_NAME }, { key: LAST_NAME }];
 const avatarSchema = [{ key: AVATAR_IMAGE }];
 
-const ProfileHeader = ({ onBack, onProfile, preferences }) => {
+const ActionHeader = ({ onBack, onProfile, preferences }) => {
   const initials = `${
     preferences[FIRST_NAME] ? preferences[FIRST_NAME][0] : ''
   }${preferences[LAST_NAME] ? preferences[LAST_NAME][0] : ''}`;
@@ -23,11 +23,18 @@ const ProfileHeader = ({ onBack, onProfile, preferences }) => {
       <RoundButton title={initials} onPress={onProfile} />
     );
 
+  const hasBackButton = onBack !== undefined;
+
   return (
     <View style={styles.container}>
       <View style={styles.space} />
       <View style={styles.headerBar}>
-        <RoundButton title={LEFT_ARROW} onPress={onBack} />
+        <RoundButton
+          title={LEFT_ARROW}
+          onPress={onBack}
+          hidden={!hasBackButton}
+          disabled={!hasBackButton}
+        />
         <Image
           source={require('../../assets/header.png')}
           style={styles.image}
@@ -51,4 +58,4 @@ const styles = StyleSheet.create({
   avatar: { height: 50, width: 50, borderRadius: 25, margin: 15 },
 });
 
-export default ProfileHeader;
+export default ActionHeader;

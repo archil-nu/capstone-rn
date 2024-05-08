@@ -5,9 +5,10 @@ import usePreferences from '../hooks/usePreferences';
 
 import OnboardingScreen from '../screens/OnboardingScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import HomeScreen from '../screens/Home';
+import HomeScreen from '../screens/HomeScreen';
 
-import ProfileHeader from '../components/Header/ProfileHeader';
+import ActionHeader from '../components/Header/ActionHeader';
+import SimpleHeader from '../components/Header/SimpleHeader';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,35 +27,51 @@ const RootNavigator = () => {
   const { isOnboardingComplete } = preferences;
 
   return (
-    <Stack.Navigator
-    // screenOptions={{
-    //   headerTitle: () => <LemonHeader />,
-    // }}
-    >
+    <Stack.Navigator>
       {isOnboardingComplete ? (
-        <Stack.Screen
-          name="Profile"
-          options={({ navigation, route }) => ({
-            header: () => (
-              <ProfileHeader
+        <>
+          <Stack.Screen
+            name="Home"
+            options={({ navigation, route }) => ({
+              header: () => (
+                <ActionHeader
+                  preferences={preferences}
+                  onProfile={() => console.log('sign out')}
+                />
+              ),
+            })}
+          >
+            {(props) => <HomeScreen {...props} preferences={preferences} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="Profile"
+            options={({ navigation, route }) => ({
+              header: () => (
+                <ActionHeader
+                  preferences={preferences}
+                  onBack={() => console.log('back')}
+                  onProfile={() => console.log('sign out')}
+                />
+              ),
+            })}
+          >
+            {(props) => (
+              <ProfileScreen
+                {...props}
                 preferences={preferences}
-                onBack={() => console.log('back')}
-                onProfile={() => console.log('sign out')}
+                savePreferences={savePreferences}
+                clearPreferences={clearPreferences}
               />
-            ),
+            )}
+          </Stack.Screen>
+        </>
+      ) : (
+        <Stack.Screen
+          name="Onboarding"
+          options={() => ({
+            header: () => <SimpleHeader />,
           })}
         >
-          {(props) => (
-            <ProfileScreen
-              {...props}
-              preferences={preferences}
-              savePreferences={savePreferences}
-              clearPreferences={clearPreferences}
-            />
-          )}
-        </Stack.Screen>
-      ) : (
-        <Stack.Screen name="Onboarding" options={{ headerShown: false }}>
           {(props) => (
             <OnboardingScreen
               {...props}

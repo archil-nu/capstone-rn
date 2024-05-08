@@ -12,6 +12,7 @@ import {
   SPECIAL_OFFERS,
   NEWSLETTER,
   AVATAR_IMAGE,
+  PHONE_MASK,
 } from '../utils';
 import Checkbox from '../components/Checkbox/Checkbox';
 import PlainButton from '../components/Button/PlainButton';
@@ -38,7 +39,7 @@ const profileSchema = [
     placeholder: 'Enter your phone number',
     key: PHONE,
     keyboardType: 'numeric',
-    mask: '(999) 999-9999',
+    mask: PHONE_MASK,
   },
 ];
 

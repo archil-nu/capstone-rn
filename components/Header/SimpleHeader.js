@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from 'react-native';
 
-const LemonHeader = () => {
+const SimpleHeader = () => {
   return (
     <View style={styles.container}>
       <View style={styles.space} />
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
   image: { resizeMode: 'contain', height: 50, width: 200 },
 });
 
-export default LemonHeader;
+export default SimpleHeader;

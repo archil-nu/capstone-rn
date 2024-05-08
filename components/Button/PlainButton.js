@@ -93,6 +93,8 @@ const labelStyles = StyleSheet.create({
   },
   hidden: {
     backgroundColor: 'transparent',
+    color: 'transparent',
+    borderColor: 'transparent',
   },
 });
 

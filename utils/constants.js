@@ -11,3 +11,5 @@ export const ORDER_STATUSES = 'orderStatuses';
 export const PASSWORD_CHANGES = 'passwordChanges';
 export const SPECIAL_OFFERS = 'specialOffers';
 export const NEWSLETTER = 'newsletter';
+
+export const PHONE_MASK = '(999) 999-9999';
