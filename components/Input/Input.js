@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { MaskedTextInput } from 'react-native-mask-text';
 import {
   COLORS,
   PRIMARY,
@@ -17,21 +18,36 @@ const Input = ({
   value,
   onChange,
   customStyles,
+  mask,
 }) => {
   const mergedStyles = StyleSheet.create({ ...inputStyles, ...customStyles });
+  const isMasked = !!mask;
 
   return (
     <View style={mergedStyles.container}>
       <View style={mergedStyles.labelBox}>
         <Text style={mergedStyles.label}>{label}</Text>
       </View>
-      <TextInput
-        style={mergedStyles.inputBox}
-        value={value}
-        onChangeText={onChange}
-        placeholder={placeholder}
-        keyboardType={keyboardType}
-      />
+      {isMasked ? (
+        <MaskedTextInput
+          style={mergedStyles.inputBox}
+          value={value}
+          onChangeText={(text, rawText) => {
+            onChange(rawText);
+          }}
+          placeholder={placeholder}
+          keyboardType={keyboardType}
+          mask={mask}
+        />
+      ) : (
+        <TextInput
+          style={mergedStyles.inputBox}
+          value={value}
+          onChangeText={onChange}
+          placeholder={placeholder}
+          keyboardType={keyboardType}
+        />
+      )}
     </View>
   );
 };

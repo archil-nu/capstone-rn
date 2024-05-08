@@ -11,9 +11,12 @@ import {
   PASSWORD_CHANGES,
   SPECIAL_OFFERS,
   NEWSLETTER,
+  AVATAR_IMAGE,
 } from '../utils';
 import Checkbox from '../components/Checkbox/Checkbox';
 import PlainButton from '../components/Button/PlainButton';
+import Avatar from '../components/Avatar/Avatar';
+
 import { DARK, LIGHT, YELLOW } from '../styles';
 
 const personalInformationTitle = 'Personal Information';
@@ -34,6 +37,8 @@ const profileSchema = [
     label: 'Phone number',
     placeholder: 'Enter your phone number',
     key: PHONE,
+    keyboardType: 'numeric',
+    mask: '(999) 999-9999',
   },
 ];
 
@@ -56,6 +61,8 @@ const emailNotificationsSchema = [
   },
 ];
 
+const avatarSchema = [{ label: 'Avatar', key: AVATAR_IMAGE }];
+
 const ProfileScreen = ({ preferences, savePreferences, clearPreferences }) => {
   const [fields, setFields] = React.useState({});
 
@@ -71,6 +78,7 @@ const ProfileScreen = ({ preferences, savePreferences, clearPreferences }) => {
     const fieldPreferences = [
       ...profileSchema,
       ...emailNotificationsSchema,
+      ...avatarSchema,
     ].reduce((acc, field) => {
       return { ...acc, [field.key]: preferences[field.key] };
     }, {});
@@ -85,6 +93,13 @@ const ProfileScreen = ({ preferences, savePreferences, clearPreferences }) => {
   return (
     <ScrollView style={profileStyles.container}>
       <Text style={profileStyles.sectionTitle}>{personalInformationTitle}</Text>
+      <Avatar
+        label={avatarSchema[0].label}
+        firstName={fields[FIRST_NAME]}
+        lastName={fields[LAST_NAME]}
+        image={fields[AVATAR_IMAGE]}
+        updateImage={handleChanges(AVATAR_IMAGE)}
+      />
       {profileSchema.map((field) => (
         <ProfileInput
           key={field.key}
@@ -92,6 +107,8 @@ const ProfileScreen = ({ preferences, savePreferences, clearPreferences }) => {
           placeholder={field.placeholder}
           onChange={handleChanges(field.key)}
           value={fields[field.key] || ''}
+          keyboardType={field.keyboardType || 'default'}
+          mask={field.mask}
         />
       ))}
       <Text style={profileStyles.sectionTitle}>{emailNotificationsTitle}</Text>
@@ -164,7 +181,6 @@ const profileStyles = StyleSheet.create({
   saveDiscardSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // width: '100%',
   },
 });
 

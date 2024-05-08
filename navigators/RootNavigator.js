@@ -37,6 +37,7 @@ const RootNavigator = () => {
           options={({ navigation, route }) => ({
             header: () => (
               <ProfileHeader
+                preferences={preferences}
                 onBack={() => console.log('back')}
                 onProfile={() => console.log('sign out')}
               />

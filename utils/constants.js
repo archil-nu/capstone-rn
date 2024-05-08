@@ -1,4 +1,7 @@
 export const IS_ONBOARDING_COMPLETE = 'isOnboardingComplete';
+
+export const AVATAR_IMAGE = 'avatarImage';
+
 export const FIRST_NAME = 'firstName';
 export const EMAIL = 'email';
 export const LAST_NAME = 'lastName';

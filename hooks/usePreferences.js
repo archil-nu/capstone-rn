@@ -14,6 +14,7 @@ import {
   PASSWORD_CHANGES,
   SPECIAL_OFFERS,
   NEWSLETTER,
+  AVATAR_IMAGE,
 } from '../utils/constants';
 
 const defaultPreferences = {
@@ -26,6 +27,7 @@ const defaultPreferences = {
   [PASSWORD_CHANGES]: false,
   [SPECIAL_OFFERS]: false,
   [NEWSLETTER]: false,
+  [AVATAR_IMAGE]: null,
 };
 
 const ALL_KEYS = [
@@ -38,6 +40,7 @@ const ALL_KEYS = [
   PASSWORD_CHANGES,
   SPECIAL_OFFERS,
   NEWSLETTER,
+  AVATAR_IMAGE,
 ];
 
 const usePreferences = () => {
