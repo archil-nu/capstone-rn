@@ -56,7 +56,7 @@ const emailNotificationsSchema = [
   },
 ];
 
-const ProfileScreen = ({ preferences, updatePreferences, savePreferences }) => {
+const ProfileScreen = ({ preferences, savePreferences, clearPreferences }) => {
   const [fields, setFields] = React.useState({});
 
   React.useEffect(() => {
@@ -78,11 +78,8 @@ const ProfileScreen = ({ preferences, updatePreferences, savePreferences }) => {
     setFields(fieldPreferences);
   };
 
-  const handleSavePreferences = () => {
-    Object.keys(fields).forEach((key) => {
-      updatePreferences(key)(fields[key]);
-      savePreferences();
-    });
+  const handleSavePreferences = async () => {
+    await savePreferences(fields);
   };
 
   return (
@@ -111,7 +108,9 @@ const ProfileScreen = ({ preferences, updatePreferences, savePreferences }) => {
         overrideButtonStyles={profileStyles.logOutButton}
         overrideLabelStyles={profileStyles.logOutLabel}
         title={logOutButtonTitle}
-        onPress={() => console.log('Log out')}
+        onPress={() => {
+          clearPreferences();
+        }}
       />
       <View style={profileStyles.saveDiscardSection}>
         <PlainButton

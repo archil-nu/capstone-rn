@@ -64,6 +64,7 @@ const buttonStyles = StyleSheet.create({
   },
   hidden: {
     backgroundColor: 'transparent',
+    borderColor: 'transparent',
   },
   disabled: {
     opacity: 0.5,

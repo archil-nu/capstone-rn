@@ -26,12 +26,37 @@ const isValid = (firstName, email) => {
   return !!firstName && !!validateEmail(email);
 };
 
+const onboardingSchema = [
+  {
+    label: 'First Name',
+    placeholder: 'Enter your first Name',
+    key: FIRST_NAME,
+  },
+  { label: 'Email', placeholder: 'Enter your email', key: EMAIL },
+];
+
 const OnboardingScreen = ({
   preferences,
   updatePreferences,
   savePreferences,
 }) => {
-  const { firstName, email } = preferences;
+  const [fields, setFields] = React.useState({});
+
+  React.useEffect(() => {
+    handleResetFields();
+  }, []);
+
+  const handleChanges = (key) => (value) => {
+    setFields({ ...fields, [key]: value });
+  };
+
+  const handleResetFields = () => {
+    const fieldPreferences = [...onboardingSchema].reduce((acc, field) => {
+      return { ...acc, [field.key]: preferences[field.key] };
+    }, {});
+
+    setFields(fieldPreferences);
+  };
 
   return (
     <>
@@ -41,34 +66,32 @@ const OnboardingScreen = ({
           <Text style={onboardingStyles.welcomeText}>{welcomeMessage}</Text>
         </View>
         <View style={onboardingStyles.form}>
-          <Input
-            label={'First Name*'}
-            placeholder={'First Name'}
-            keyboardType={'default'}
-            value={firstName}
-            onChange={updatePreferences(FIRST_NAME)}
-          />
-          <Input
-            label={'Email*'}
-            placeholder={'Email'}
-            keyboardType={'email-address'}
-            value={email}
-            onChange={updatePreferences(EMAIL)}
-          />
+          {onboardingSchema.map((field) => (
+            <Input
+              key={field.key}
+              label={field.label}
+              placeholder={field.placeholder}
+              keyboardType={'default'}
+              value={fields[field.key]}
+              onChange={handleChanges(field.key)}
+            />
+          ))}
         </View>
         <View style={onboardingStyles.footer}>
           <View style={onboardingStyles.buttons}>
             <PlainButton hidden={true} />
             <PlainButton
-              onPress={() => {
-                if (isValid(firstName, email)) {
-                  updatePreferences(IS_ONBOARDING_COMPLETE)(true);
-                  savePreferences();
+              onPress={async () => {
+                if (isValid(fields[FIRST_NAME], fields[EMAIL])) {
+                  await savePreferences({
+                    ...fields,
+                    [IS_ONBOARDING_COMPLETE]: true,
+                  });
                 }
               }}
               title={nextMessage}
               type={DARK}
-              disabled={!isValid(firstName, email)}
+              disabled={!isValid(fields[FIRST_NAME], fields[EMAIL])}
             />
           </View>
         </View>
@@ -99,6 +122,8 @@ const onboardingStyles = StyleSheet.create({
     flex: 0.4,
     width: '100%',
     justifyContent: 'center',
+    paddingLeft: 20,
+    paddingRight: 20,
     backgroundColor: COLORS[SECONDARY][PEACH_PUFF],
   },
   buttons: {

@@ -2,6 +2,8 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
+import useUpdate from './useUpdate';
+
 import {
   IS_ONBOARDING_COMPLETE,
   FIRST_NAME,
@@ -41,7 +43,6 @@ const ALL_KEYS = [
 const usePreferences = () => {
   const [preferences, setPreferences] = React.useState(defaultPreferences);
   const [isLoading, setIsLoading] = React.useState(true);
-  const saveRef = React.useRef(null);
 
   React.useEffect(() => {
     const fetchStorage = async () => {
@@ -63,26 +64,17 @@ const usePreferences = () => {
     fetchStorage();
   }, []);
 
-  React.useEffect(() => {
-    if (saveRef.current) {
-      savePreferences();
-      saveRef.current = false;
-    }
-  }, [saveRef.current]);
-
-  const markForSave = () => {
-    saveRef.current = true;
-  };
-
-  const savePreferences = async () => {
-    const entries = Object.entries(preferences).map(([key, value]) => [
+  const savePreferences = async (updates) => {
+    console.log('updates', updates);
+    const mergedPreferences = { ...preferences, ...updates };
+    const entries = Object.entries(mergedPreferences).map(([key, value]) => [
       key,
       JSON.stringify(value),
     ]);
     try {
-      console.log(entries);
       await AsyncStorage.multiSet(entries);
       Alert.alert('Preferences saved!');
+      setPreferences(mergedPreferences);
     } catch (e) {
       Alert.alert(`An error occurred: ${e.message}`);
     }
@@ -91,26 +83,14 @@ const usePreferences = () => {
   const clearPreferences = async () => {
     try {
       await AsyncStorage.clear();
+      Alert.alert('Preferences cleared!');
+      setPreferences(defaultPreferences);
     } catch (e) {
       Alert.alert(`An error occurred: ${e.message}`);
     }
   };
 
-  const updatePreferences = (key) => (value) => {
-    console.log(key, value);
-    setPreferences((prevState) => ({
-      ...prevState,
-      key: value,
-    }));
-  };
-
-  return [
-    preferences,
-    isLoading,
-    updatePreferences,
-    markForSave,
-    clearPreferences,
-  ];
+  return [preferences, isLoading, savePreferences, clearPreferences];
 };
 
 export default usePreferences;

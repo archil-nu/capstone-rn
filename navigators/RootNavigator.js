@@ -12,13 +12,8 @@ import ProfileHeader from '../components/Header/ProfileHeader';
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
-  const [
-    preferences,
-    loading,
-    updatePreferences,
-    savePreferences,
-    clearPreferences,
-  ] = usePreferences();
+  const [preferences, loading, savePreferences, clearPreferences] =
+    usePreferences();
 
   // React.useEffect(() => {
   //   clearPreferences();
@@ -29,9 +24,6 @@ const RootNavigator = () => {
   }
 
   const { isOnboardingComplete } = preferences;
-
-  console.log(preferences);
-  console.log(isOnboardingComplete);
 
   return (
     <Stack.Navigator
@@ -55,7 +47,6 @@ const RootNavigator = () => {
             <ProfileScreen
               {...props}
               preferences={preferences}
-              updatePreferences={updatePreferences}
               savePreferences={savePreferences}
               clearPreferences={clearPreferences}
             />
@@ -67,7 +58,6 @@ const RootNavigator = () => {
             <OnboardingScreen
               {...props}
               preferences={preferences}
-              updatePreferences={updatePreferences}
               savePreferences={savePreferences}
             />
           )}
