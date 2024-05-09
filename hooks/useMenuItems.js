@@ -18,6 +18,7 @@ const fetchMenuAPI = async () => {
     return (
       menu.map((item, index) => ({
         ...item,
+        price: `$${item.price.toFixed(2)}`,
         id: index,
       })) || []
     );
@@ -53,13 +54,12 @@ const useMenuItems = () => {
 
         if (!menu.length) {
           menu = await fetchMenuAPI();
-          console.log('menu', menu);
           await saveMenuItems(menu);
         }
         const { menuListWithSections, uniqueSections } =
           createMenuListWithSections(menu);
 
-        console.log('menuListWithSections', menuListWithSections);
+        // console.log('menuListWithSections', menuListWithSections);
 
         setMenuItems(menuListWithSections);
         setSections(uniqueSections);
@@ -85,7 +85,7 @@ const useMenuItems = () => {
           activeCategories
         );
         const { menuListWithSections } = createMenuListWithSections(menuItems);
-        console.log('menuListWithSections', menuListWithSections);
+        // console.log('menuListWithSections', menuListWithSections);
         setMenuItems(menuListWithSections);
       } catch (e) {
         Alert.alert(e.message);

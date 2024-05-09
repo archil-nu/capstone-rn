@@ -2,13 +2,23 @@ import { StyleSheet } from 'react-native';
 
 import PlainButton from './PlainButton';
 
-const RoundButton = ({ overrideButtonStyles, ...props }) => {
+const RoundButton = ({
+  overrideButtonStyles,
+  overrideLabelStyles,
+  ...props
+}) => {
   const mergedStyles = StyleSheet.create({
     ...roundButtonStyles,
     ...overrideButtonStyles,
   });
 
-  return <PlainButton {...props} overrideButtonStyles={mergedStyles} />;
+  return (
+    <PlainButton
+      {...props}
+      overrideButtonStyles={mergedStyles}
+      overrideLabelStyles={overrideLabelStyles}
+    />
+  );
 };
 
 const roundButtonStyles = StyleSheet.create({

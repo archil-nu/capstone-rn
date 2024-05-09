@@ -57,9 +57,6 @@ const filterStyles = StyleSheet.create({
     marginVertical: 10,
     marginLeft: 15,
     borderRadius: 15,
-
-    // borderWidth: 1,
-    // borderColor: 'white',
   },
   label: {
     fontSize: 16,

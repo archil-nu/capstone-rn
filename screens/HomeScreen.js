@@ -1,11 +1,16 @@
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+
+import { View, StyleSheet } from 'react-native';
 import MenuList from '../components/Menu/MenuList';
+import Banner from '../components/Banner/Banner';
 
 const HomeScreen = ({ preferences }) => {
+  const [searchText, setSearchText] = React.useState('');
+
   return (
     <View style={homeStyles.container}>
-      <Text>Home Screen</Text>
-      <MenuList />
+      <Banner onSearch={setSearchText} />
+      <MenuList searchText={searchText} />
     </View>
   );
 };

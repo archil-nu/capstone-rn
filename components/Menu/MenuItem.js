@@ -15,10 +15,10 @@ const MenuItem = ({ name, description, image, price }) => {
     <View style={menuItemStyles.container}>
       <View style={menuItemStyles.nameAndDesc}>
         <Text style={menuItemStyles.name}>{name}</Text>
-        <Text style={menuItemStyles.description} numberOfLines={3}>
+        <Text style={menuItemStyles.description} numberOfLines={2}>
           {description}
         </Text>
-        <Text style={menuItemStyles.price}>${price}</Text>
+        <Text style={menuItemStyles.price}>{price}</Text>
       </View>
       <View style={menuItemStyles.thumbnail}>
         <Image style={menuItemStyles.image} source={{ uri: imageSource }} />
@@ -47,20 +47,20 @@ const menuItemStyles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontSize: 16,
+    fontSize: 18,
     flex: 0.3,
     maxHeight: '20%',
     fontFamily: FONTS.KARLA_BOLD,
     fontWeight: 'bold',
   },
   description: {
-    fontSize: 14,
+    fontSize: 16,
     flex: 0.4,
     marginVertical: 10,
     fontFamily: FONTS.KARLA_REGULAR,
   },
   price: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     flex: 0.3,
     maxHeight: '20%',
@@ -70,7 +70,7 @@ const menuItemStyles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    borderRadius: 5,
+    borderRadius: 2,
   },
 });
 

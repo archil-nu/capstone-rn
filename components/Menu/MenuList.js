@@ -1,5 +1,13 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Text, View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
+import React from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  ScrollView,
+  VirtualizedList,
+} from 'react-native';
 import debounce from 'lodash.debounce';
 
 import useMenuItems from '../../hooks/useMenuItems';
@@ -10,28 +18,23 @@ import { COLORS, FONTS, GONDOLA, SECONDARY, LILLY_WHITE } from '../../styles';
 
 const menuTitle = 'Order for delivery!';
 
-const MenuList = () => {
-  const [searchBarText, setSearchBarText] = useState('');
-
+const MenuList = ({ searchText }) => {
   const {
     menuItems,
-    itemsQuery,
     setItemsQuery,
     sections,
     filterSelections,
     setFilterSelections,
   } = useMenuItems();
 
-  const lookup = useCallback((q) => {
-    setItemsQuery(q);
-  }, []);
+  const debouncedLookup = React.useMemo(
+    () => debounce(setItemsQuery, 500),
+    [setItemsQuery]
+  );
 
-  const debouncedLookup = useMemo(() => debounce(lookup, 500), [lookup]);
-
-  // const handleSearchChange = (text) => {
-  //   setSearchBarText(text);
-  //   debouncedLookup(text);
-  // };
+  React.useEffect(() => {
+    debouncedLookup(searchText);
+  }, [searchText]);
 
   const handleFiltersChange = async (index) => {
     const arrayCopy = [...filterSelections];
@@ -41,16 +44,6 @@ const MenuList = () => {
 
   return (
     <SafeAreaView style={menuStyles.container}>
-      {/* <Searchbar
-        placeholder="Search"
-        placeholderTextColor="white"
-        onChangeText={handleSearchChange}
-        value={searchBarText}
-        style={styles.searchBar}
-        iconColor="white"
-        inputStyle={{ color: 'white' }}
-        elevation={0}
-  /> */}
       <View style={menuStyles.header}>
         <Text style={menuStyles.title}>{menuTitle}</Text>
       </View>
