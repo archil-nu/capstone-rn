@@ -47,7 +47,7 @@ const useMenuItems = () => {
   React.useEffect(() => {
     (async () => {
       try {
-        await dropTable();
+        // await dropTable();
 
         await createTable();
         let menu = await getMenuItems();
@@ -58,8 +58,6 @@ const useMenuItems = () => {
         }
         const { menuListWithSections, uniqueSections } =
           createMenuListWithSections(menu);
-
-        // console.log('menuListWithSections', menuListWithSections);
 
         setMenuItems(menuListWithSections);
         setSections(uniqueSections);
@@ -85,7 +83,6 @@ const useMenuItems = () => {
           activeCategories
         );
         const { menuListWithSections } = createMenuListWithSections(menuItems);
-        // console.log('menuListWithSections', menuListWithSections);
         setMenuItems(menuListWithSections);
       } catch (e) {
         Alert.alert(e.message);

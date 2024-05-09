@@ -66,7 +66,6 @@ const usePreferences = () => {
   }, []);
 
   const savePreferences = async (updates) => {
-    console.log('updates', updates);
     const mergedPreferences = { ...preferences, ...updates };
     const entries = Object.entries(mergedPreferences).map(([key, value]) => [
       key,

@@ -2,25 +2,17 @@ import React from 'react';
 import { View, StyleSheet, Text, Alert } from 'react-native';
 
 import PlainButton from '../components/Button/PlainButton';
-import {
-  COLORS,
-  DARK,
-  DARK_SALMON,
-  FONTS,
-  LIGHT,
-  PEACH_PUFF,
-  SECONDARY,
-  LILLY_WHITE,
-  PRIMARY,
-} from '../styles';
+import Banner from '../components/Banner/Banner';
+import Input from '../components/Input/Input';
+
+import { COLORS, FONTS, SECONDARY, LILLY_WHITE, YELLOW } from '../styles';
+
 import {
   FIRST_NAME,
   EMAIL,
   IS_ONBOARDING_COMPLETE,
   validateEmail,
 } from '../utils';
-import Input from '../components/Input/Input';
-import LemonHeader from '../components/Header/SimpleHeader';
 
 const isValid = (firstName, email) => {
   return !!firstName && !!validateEmail(email);
@@ -28,18 +20,14 @@ const isValid = (firstName, email) => {
 
 const onboardingSchema = [
   {
-    label: 'First Name',
+    label: 'First Name*',
     placeholder: 'Enter your first Name',
     key: FIRST_NAME,
   },
-  { label: 'Email', placeholder: 'Enter your email', key: EMAIL },
+  { label: 'Email*', placeholder: 'Enter your email', key: EMAIL },
 ];
 
-const OnboardingScreen = ({
-  preferences,
-  updatePreferences,
-  savePreferences,
-}) => {
+const OnboardingScreen = ({ preferences, savePreferences }) => {
   const [fields, setFields] = React.useState({});
 
   React.useEffect(() => {
@@ -60,9 +48,7 @@ const OnboardingScreen = ({
 
   return (
     <View style={onboardingStyles.container}>
-      <View style={onboardingStyles.welcome}>
-        <Text style={onboardingStyles.welcomeText}>{welcomeMessage}</Text>
-      </View>
+      <Banner />
       <View style={onboardingStyles.form}>
         {onboardingSchema.map((field) => (
           <Input
@@ -88,7 +74,7 @@ const OnboardingScreen = ({
               }
             }}
             title={nextMessage}
-            type={DARK}
+            type={YELLOW}
             disabled={!isValid(fields[FIRST_NAME], fields[EMAIL])}
           />
         </View>
@@ -104,7 +90,7 @@ const onboardingStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: COLORS[SECONDARY][LILLY_WHITE],
+    backgroundColor: 'white',
   },
   welcome: {
     flex: 0.25,
@@ -119,9 +105,9 @@ const onboardingStyles = StyleSheet.create({
     flex: 0.4,
     width: '100%',
     justifyContent: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
-    backgroundColor: COLORS[SECONDARY][PEACH_PUFF],
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    backgroundColor: 'white',
   },
   buttons: {
     flex: 1,

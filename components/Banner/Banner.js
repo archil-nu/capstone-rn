@@ -27,6 +27,8 @@ const Banner = ({ onSearch }) => {
 
   const roundness = expandSearch ? 10 : 25;
 
+  const hasSearch = onSearch !== undefined;
+
   return (
     <View style={bannerStyles.container}>
       <Text style={bannerStyles.header}>{headline}</Text>
@@ -42,18 +44,20 @@ const Banner = ({ onSearch }) => {
           />
         </View>
       </View>
-      <View style={bannerStyles.footer}>
-        <TextInput
-          theme={{ roundness }}
-          style={searchStyles}
-          onFocus={() => setExpandSearch(true)}
-          onBlur={() => setExpandSearch(false)}
-          onChangeText={onSearch}
-          mode="outlined"
-          activeOutlineColor={COLORS[PRIMARY][DARK]}
-          left={<TextInput.Icon icon="magnify" />}
-        />
-      </View>
+      {hasSearch && (
+        <View style={bannerStyles.footer}>
+          <TextInput
+            theme={{ roundness }}
+            style={searchStyles}
+            onFocus={() => setExpandSearch(true)}
+            onBlur={() => setExpandSearch(false)}
+            onChangeText={onSearch}
+            mode="outlined"
+            activeOutlineColor={COLORS[PRIMARY][DARK]}
+            left={<TextInput.Icon icon="magnify" />}
+          />
+        </View>
+      )}
     </View>
   );
 };
