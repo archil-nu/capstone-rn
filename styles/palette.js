@@ -12,6 +12,7 @@ export const GONDOLA = 'gondola';
 
 export const FONTS = {
   KARLA_REGULAR: 'Karla-Regular',
+  KARLA_BOLD: 'Karla-Bold',
   MARKAZI_TEXT_REGULAR: 'MarkaziText-Regular',
 };
 

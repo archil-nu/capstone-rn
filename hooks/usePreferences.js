@@ -2,8 +2,6 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
-import useUpdate from './useUpdate';
-
 import {
   IS_ONBOARDING_COMPLETE,
   FIRST_NAME,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 import RoundButton from '../Button/RoundButton';
 
@@ -18,7 +18,9 @@ const ActionHeader = ({ onBack, onProfile, preferences }) => {
 
   const Avatar = () =>
     image ? (
-      <Image source={{ uri: image }} style={styles.avatar} />
+      <Pressable onPress={onProfile}>
+        <Image source={{ uri: image }} style={styles.avatar} />
+      </Pressable>
     ) : (
       <RoundButton title={initials} onPress={onProfile} />
     );

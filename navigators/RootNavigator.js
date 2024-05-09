@@ -36,7 +36,7 @@ const RootNavigator = () => {
               header: () => (
                 <ActionHeader
                   preferences={preferences}
-                  onProfile={() => console.log('sign out')}
+                  onProfile={() => navigation.navigate('Profile')}
                 />
               ),
             })}
@@ -49,8 +49,7 @@ const RootNavigator = () => {
               header: () => (
                 <ActionHeader
                   preferences={preferences}
-                  onBack={() => console.log('back')}
-                  onProfile={() => console.log('sign out')}
+                  onBack={() => navigation.goBack()}
                 />
               ),
             })}
