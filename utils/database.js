@@ -46,7 +46,7 @@ export const saveMenuItems = async (menuItems) => {
         `insert into menuitems (uuid, name, price, description, image, category) values ${menuItems
           .map(
             (item) =>
-              `("${item.id}", "${item.title}", "${item.price}", "${item.description}", "${item.image}", "${item.category}")`
+              `("${item.id}", "${item.name}", "${item.price}", "${item.description}", "${item.image}", "${item.category}")`
           )
           .join(', ')};`,
         [],
@@ -63,7 +63,7 @@ export const filterByQueryAndCategories = (query, activeCategories) => {
   return new Promise((resolve) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'select * from menuitems where title like ?',
+        'select * from menuitems where name like ?',
         [`%${query}%`],
         (_, { rows }) => {
           resolve(

@@ -1,26 +1,18 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  SectionList,
-  SafeAreaView,
-  StatusBar,
-  Alert,
-  FlatList,
-} from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import debounce from 'lodash.debounce';
 
 import useMenuItems from '../../hooks/useMenuItems';
 
 import Filters from './Filters';
 import MenuItem from './MenuItem';
-import { COLORS, FONTS, GONDOLA, SECONDARY } from '../../styles';
+import { COLORS, FONTS, GONDOLA, SECONDARY, LILLY_WHITE } from '../../styles';
 
 const menuTitle = 'Order for delivery!';
 
 const MenuList = () => {
   const [searchBarText, setSearchBarText] = useState('');
+
   const {
     menuItems,
     itemsQuery,
@@ -67,13 +59,12 @@ const MenuList = () => {
         onChange={handleFiltersChange}
         sections={sections}
       />
+      <View style={menuStyles.separator} />
       <FlatList
         style={menuStyles.sectionList}
         data={menuItems}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <MenuItem title={item.name} price={item.price} />
-        )}
+        renderItem={({ item }) => <MenuItem {...item} />}
       />
     </SafeAreaView>
   );
@@ -86,9 +77,24 @@ const menuStyles = StyleSheet.create({
     // backgroundColor: 'red',
     width: '100%',
   },
-  sectionList: {
-    // paddingHorizontal: 16,
+  header: {
+    padding: 10,
+    paddingHorizontal: 20,
   },
+  separator: {
+    height: 1,
+    marginHorizontal: 15,
+    // padding: 10,
+    backgroundColor: COLORS[SECONDARY][LILLY_WHITE],
+  },
+  title: {
+    fontSize: 20,
+    fontFamily: FONTS.KARLA_BOLD,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: COLORS[SECONDARY][GONDOLA],
+  },
+  sectionList: {},
   searchBar: {
     marginBottom: 24,
     backgroundColor: '#495E57',
@@ -99,19 +105,6 @@ const menuStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // padding: 16,
-  },
-  header: {
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    // backgroundColor: 'white',
-  },
-  title: {
-    fontSize: 20,
-    fontFamily: FONTS.KARLA_BOLD,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    color: COLORS[SECONDARY][GONDOLA],
   },
 });
 

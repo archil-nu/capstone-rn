@@ -32,17 +32,6 @@ const createMenuListWithSections = (data) => {
   const sections = data.map((item) => item.category);
   const uniqueSections = Array.from(new Set(sections));
 
-  // const menuListWithSections = uniqueSections.map((section) => ({
-  //   title: section,
-  //   data: data
-  //     .filter((item) => item.category === section)
-  //     .map((item) => ({
-  //       id: item.id,
-  //       title: item.title,
-  //       price: item.price,
-  //     })),
-  // }));
-
   return { menuListWithSections: data, uniqueSections };
 };
 
@@ -96,6 +85,7 @@ const useMenuItems = () => {
           activeCategories
         );
         const { menuListWithSections } = createMenuListWithSections(menuItems);
+        console.log('menuListWithSections', menuListWithSections);
         setMenuItems(menuListWithSections);
       } catch (e) {
         Alert.alert(e.message);
