@@ -1,6 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, PRIMARY, DARK, SECONDARY, LILLY_WHITE } from '../../styles';
-import { FONTS } from '../../styles';
+
+import {
+  COLORS,
+  PRIMARY,
+  DARK,
+  SECONDARY,
+  LILLY_WHITE,
+  FONTS,
+} from '../../styles';
 
 import Input from './Input';
 

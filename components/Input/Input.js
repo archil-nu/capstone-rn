@@ -1,15 +1,7 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { MaskedTextInput } from 'react-native-mask-text';
-import {
-  COLORS,
-  PRIMARY,
-  SECONDARY,
-  LIGHT,
-  DARK,
-  LILLY_WHITE,
-  GONDOLA,
-  FONTS,
-} from '../../styles';
+
+import { COLORS, PRIMARY, SECONDARY, DARK, GONDOLA, FONTS } from '../../styles';
 
 const Input = ({
   label,

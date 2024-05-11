@@ -1,11 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, Alert } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
-import PlainButton from '../components/Button/PlainButton';
-import Banner from '../components/Banner/Banner';
-import Input from '../components/Input/Input';
-
-import { COLORS, FONTS, SECONDARY, LILLY_WHITE, YELLOW } from '../styles';
+import { Banner, Input, PlainButton } from '../components';
+import { FONTS, YELLOW } from '../styles';
 
 import {
   FIRST_NAME,

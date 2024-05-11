@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import ProfileInput from '../components/Input/ProfileInput';
+
+import { ProfileInput, Checkbox, PlainButton, Avatar } from '../components';
 import {
   EMAIL,
   FIRST_NAME,
@@ -14,9 +14,6 @@ import {
   AVATAR_IMAGE,
   PHONE_MASK,
 } from '../utils';
-import Checkbox from '../components/Checkbox/Checkbox';
-import PlainButton from '../components/Button/PlainButton';
-import Avatar from '../components/Avatar/Avatar';
 
 import { DARK, LIGHT, YELLOW } from '../styles';
 

@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+
 import {
   COLORS,
-  GONDOLA,
   PRIMARY,
   SECONDARY,
   DARK,

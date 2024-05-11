@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  ScrollView,
-  VirtualizedList,
-} from 'react-native';
+
+import { Text, View, StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import debounce from 'lodash.debounce';
 
 import useMenuItems from '../../hooks/useMenuItems';
