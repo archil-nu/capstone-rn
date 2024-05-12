@@ -12,7 +12,7 @@ In the terminal, make sure you're in the correct directory where your project is
 
 Once you're in the correct directory, type the following command and press Enter:
 
-`npm i`
+`yarn install`
 
 This command will install all the npm packages listed in your package.json file. If the installation is successful, you should see a node_modules folder in your project directory, which contains all the installed packages.
 
@@ -20,4 +20,4 @@ This command will install all the npm packages listed in your package.json file.
 
 To run the app type the following command and press Enter:
 
-`npm start`
+`yarn start`
